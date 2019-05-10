@@ -1,43 +1,43 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Web extends CI_Controller {
+class Web extends CI_Controller
+{
+    public function index()
+    {
+        $this->load->view('listado');
+    }
 
-	public function index()
-	{
-		$this->load->view('listado');
-	}
+    public function agregar()
+    {
+        if ($_POST) {
+            core_sitio::agregar($_POST);
+            redirect('');
+        }
 
-	public function agregar(){
+        $this->load->view('platillas/encabezado');
+        $this->load->view('editar', ['voto' => false]);
+        $this->load->view('platillas/pie');
+    }
 
-		if ($_POST) {
-			core_sitio::agregar($_POST);
-			redirect('');
-		}
+    public function editar($id=0)
+    {
+        if ($_POST) {
+            core_sitio::actualizarVoto($id, $_POST);
+            redirect('');
+        }
 
-		$this->load->view('platillas/encabezado');
-		$this->load->view('editar', ['voto' => false]);
-		$this->load->view('platillas/pie');
-	}
+        if ($id==0) {
+            redirect('');
+        }
 
-	public function editar($id=0){
+        $voto = core_sitio::cargarVoto($id);
 
-		if ($_POST) {
-			core_sitio::actualizarVoto($id, $_POST);
-			redirect('');
-		}
-
-		if ($id==0) {
-			redirect('');
-		}
-
-		$voto = core_sitio::cargarVoto($id);
-
-		$this->load->view('platillas/encabezado');
-		$this->load->view('editar', ['voto'=>$voto]);
-		$this->load->view('platillas/pie');
-	}
+        $this->load->view('platillas/encabezado');
+        $this->load->view('editar', ['voto'=>$voto]);
+        $this->load->view('platillas/pie');
+    }
 }
 
 /* End of file Web.php */

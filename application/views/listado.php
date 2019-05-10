@@ -1,9 +1,9 @@
 <?php
 
-	$CI =& get_instance();
+    $CI =& get_instance();
 
-	$CI->load->helper('url');
-	$CI->load->view('platillas/encabezado');
+    $CI->load->helper('url');
+    $CI->load->view('platillas/encabezado');
 
 ?>
 
@@ -22,11 +22,11 @@
 	</thead>
 	<tbody>
 		<?php
-			$votos =core_sitio::cargarVotos();
-			foreach ($votos as $keyVoto => $valueVoto) {
-				$urlEditar = base_url("web/editar/{$valueVoto->ID}");
-				$voto->$Apellido = htmlentities($voto->Apellido);
-				echo "<tr>
+            $votos =core_sitio::cargarVotos();
+            foreach ($votos as $keyVoto => $valueVoto) {
+                $urlEditar = base_url("web/editar/{$valueVoto->ID}");
+                $voto->$Apellido = htmlentities($voto->Apellido);
+                echo "<tr>
 					<td>{$valueVoto->ID}</td>
 					<td>{$valueVoto->Nombre}</td>
 					<td>{$valueVoto->Apellido}</td>
@@ -36,8 +36,8 @@
 					<td><a href='$urlEditar'>Editar</a></td>
 					</tr>
 				";
-			}
-		?>
+            }
+        ?>
 	</tbody>
 </table>
 
